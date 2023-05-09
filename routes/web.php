@@ -18,4 +18,5 @@ Route::get('/', function () {
     return view('blogs.index');
 });
 Route::get('/publicaciones', [publicacionesController::class, 'index']);
+Route::post('/nuevapublicacion'     , [publicacionesController::class, 'store']);
 

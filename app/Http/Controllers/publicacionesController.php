@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\models  as publicaciones;
+use DB ;
 
 class publicacionesController extends Controller
 {
@@ -40,6 +41,24 @@ class publicacionesController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = $request->validate([
+            'titulo' => 'required|max:60',
+            'contenido' => 'required',
+        ]);
+
+        // DB::table('publicaciones')->insert([
+        //     'titulo' => $request->titulo,
+        //     'contenido' => $request->contenido
+        // ]);
+        $publication = new publicaciones\publicaciones ;
+        $publication->titulo     = $request->titulo;
+        $publication->contenido   = $request->contenido;
+        $publication->save();
+        
+        return response()->json([
+            'status' => 'ok',
+            'response' => []
+        ]);
     }
 
     /**
